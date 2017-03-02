@@ -14,7 +14,8 @@ class MenuController
     puts "3 - Search for an entry by name"
     puts "4 - Search for an entry by entry number"
     puts "5 - Import entries from a CSV"
-    puts "6 - Exit"
+    puts "6 - Delete all entries"
+    puts "7 - Exit"
     print "Enter your selection: "
 
     selection = gets.to_i
@@ -41,6 +42,10 @@ class MenuController
         read_csv
         main_menu
       when 6
+        system "clear"
+        delete_all
+        main_menu
+      when 7
         puts "Good-bye!"
         exit(0)
       else
@@ -177,5 +182,13 @@ class MenuController
       puts "#{file_name} is not a valid CSV file, please enter the name of a valid CSV file"
       read_csv
     end
+  end
+
+  def delete_all
+    puts "Type 'yes' to confirm"
+    entry = gets.chomp
+    address_book.delete_all unless entry != "yes"
+    system "clear"
+    main_menu
   end
 end
